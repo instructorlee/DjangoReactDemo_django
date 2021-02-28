@@ -25,8 +25,9 @@ class Book(BaseModel):
     author = models.CharField(max_length=200)
     price = models.FloatField(default=0)
 
+    owner = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='books')
     checked_out_to = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, default=None, blank=True,
-                                       related_name='books')
+                                       related_name='checkedout_books')
     liked_by = models.ManyToManyField(Member, related_name='books_liked', blank=True)
 
     def __str__(self):
